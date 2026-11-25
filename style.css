@@ -85,7 +85,7 @@ body {
 .progress-ring__progress {
   stroke: var(--work-color);
   stroke-linecap: round;
-  stroke-dasharray: 678.58;
+  stroke-dasharray: 678.584;
   stroke-dashoffset: 0;
   transition: stroke-dashoffset 0.25s linear, stroke 0.2s ease;
 }
