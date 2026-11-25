@@ -1,0 +1,162 @@
+:root {
+  color-scheme: light;
+  --page-background: #f4f7fb;
+  --card-background: #ffffff;
+  --text-color: #1f2937;
+  --muted-color: #64748b;
+  --track-color: #e2e8f0;
+  --work-color: #ef4444;
+  --break-color: #14b8a6;
+  --button-color: #2563eb;
+  --button-text: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+  background: var(--page-background);
+  color: var(--text-color);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.app {
+  width: min(92vw, 34rem);
+  padding: 1.5rem 0;
+}
+
+.timer-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: clamp(1.25rem, 5vw, 2.5rem);
+  border-radius: 1.25rem;
+  background: var(--card-background);
+  box-shadow: 0 0.75rem 2rem rgba(15, 23, 42, 0.12);
+  text-align: center;
+}
+
+.timer-card h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 5vw, 2.25rem);
+}
+
+.mode-label {
+  margin: 0;
+  color: var(--muted-color);
+  font-size: 1.125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.timer-ring {
+  position: relative;
+  width: min(70vw, 16rem);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+}
+
+.progress-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.progress-ring__track,
+.progress-ring__progress {
+  fill: none;
+  stroke-width: 12;
+}
+
+.progress-ring__track {
+  stroke: var(--track-color);
+}
+
+.progress-ring__progress {
+  stroke: var(--work-color);
+  stroke-linecap: round;
+  stroke-dasharray: 678.58;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.25s linear, stroke 0.2s ease;
+}
+
+.timer-display {
+  position: relative;
+  z-index: 1;
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(3rem, 12vw, 4.5rem);
+  font-weight: 800;
+}
+
+.session-counter {
+  margin: 0;
+  color: var(--muted-color);
+}
+
+.session-counter strong {
+  color: var(--text-color);
+  font-size: 1.25em;
+}
+
+.controls {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.controls button {
+  min-height: 2.75rem;
+  padding: 0.65rem 1rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--button-color);
+  color: var(--button-text);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.controls button:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.35);
+  outline-offset: 3px;
+}
+
+.timer-card.is-running .progress-ring__progress {
+  filter: drop-shadow(0 0 0.25rem rgba(239, 68, 68, 0.25));
+}
+
+.timer-card.is-paused .progress-ring__progress {
+  opacity: 0.65;
+}
+
+.timer-card.is-break .progress-ring__progress {
+  stroke: var(--break-color);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress-ring__progress {
+    transition: none;
+  }
+}
+
+@media (max-width: 28rem) {
+  .timer-card {
+    border-radius: 0;
+  }
+
+  .controls button {
+    flex: 1 1 8rem;
+  }
+}
